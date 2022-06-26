@@ -11,3 +11,6 @@ DynamicStrategy.RunStrategy(OutputFormat.Html);
 
 Console.WriteLine("******** Static Strategy Pattern ********");
 StaticStrategy.RunStrategies();
+
+Console.WriteLine("******** Comparison Example with .NET Framework Strategy ********");
+EqualityAndComparison.RunStrategy();
