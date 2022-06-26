@@ -1,70 +1,14 @@
 ﻿/*
  *  Example of a Dynamic Strategy Pattern
+ *
+ *  Where the strategy can be swapped at runtime
  */
 
 using System.Text;
+using DesignPatterns.Behavioral.Strategy.Shared;
 
-namespace DesignPatterns.Patterns.Behavioral.Strategy
+namespace DesignPatterns.Behavioral.Strategy
 {
-    public enum OutputFormat
-    {
-        Markdown,
-        Html
-    }
-
-    /// <summary>
-    ///     Strategy interface to implement for anything that needs to output a list
-    ///     Can dynamically swap between formats from <see cref="OutputFormat"/> enum.
-    /// </summary>
-    /// <remarks>
-    ///     Html --> <ul><li>foo</li></ul>
-    ///     <br/>
-    ///     <br/>
-    ///     Markdown --> * foo
-    /// </remarks>
-    public interface IListStrategy
-    {
-        void Start(StringBuilder sb);
-        void End(StringBuilder sb);
-        void AddListItem(StringBuilder sb, string item);
-    }
-
-    public class HtmlListStrategy : IListStrategy
-    {
-        public void Start(StringBuilder sb)
-        {
-            sb.AppendLine("<ul>");
-        }
-
-        public void End(StringBuilder sb)
-        {
-            sb.AppendLine("</ul>");
-        }
-
-        public void AddListItem(StringBuilder sb, string item)
-        {
-            sb.AppendLine($"   <li>{item}</li>");
-        }
-    }
-
-    public class MarkdownListStrategy : IListStrategy
-    {
-        public void Start(StringBuilder sb)
-        {
-            // INTENTIONALLY EMPTY FOR MARKDOWN
-        }
-
-        public void End(StringBuilder sb)
-        {
-            // INTENTIONALLY EMPTY FOR MARKDOWN
-        }
-
-        public void AddListItem(StringBuilder sb, string item)
-        {
-            sb.AppendLine($" * {item}");
-        }
-    }
-
     public class TextProcessor
     {
         private StringBuilder sb = new StringBuilder();
