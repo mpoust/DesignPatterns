@@ -4,7 +4,7 @@
 using DesignPatterns.Demonstrations;
 
 Console.WriteLine("**************** CREATIONAL STRATEGIES ****************");
-CreationalDemo.RunFactoryDemo();
+await CreationalDemo.RunFactoryDemo();
 
 Console.WriteLine("\n**************** BEHAVIORAL STRATEGIES ****************");
 BehavioralDemo.RunStrategyDemo();

@@ -11,10 +11,13 @@ namespace DesignPatterns.Demonstrations
         /// <summary>
         ///     Run the demonstration for the Factory Pattern
         /// </summary>
-        public static void RunFactoryDemo()
+        public static async Task RunFactoryDemo()
         {
             Console.WriteLine("******** Factory Method Pattern ********");
             FactoryMethod.RunDemonstration();
+
+            Console.WriteLine("\n******** Async Factory Method Pattern ********");
+            await AsyncFactory.RunDemonstration();
         }
     }
 }
