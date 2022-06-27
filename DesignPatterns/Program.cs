@@ -1,16 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using DesignPatterns.Behavioral.Strategy;
-using DesignPatterns.Behavioral.Strategy.Shared;
 
-Console.WriteLine("**************** BEHAVIORAL STRATEGIES ****************");
+using DesignPatterns.Demonstrations;
 
-Console.WriteLine("******** Dynamic Strategy Pattern ********");
-DynamicStrategy.RunStrategy(OutputFormat.Markdown);
-DynamicStrategy.RunStrategy(OutputFormat.Html);
+Console.WriteLine("**************** CREATIONAL STRATEGIES ****************");
+CreationalDemo.RunFactoryDemo();
 
-Console.WriteLine("******** Static Strategy Pattern ********");
-StaticStrategy.RunStrategies();
-
-Console.WriteLine("******** Comparison Example with .NET Framework Strategy ********");
-EqualityAndComparison.RunStrategy();
+Console.WriteLine("\n**************** BEHAVIORAL STRATEGIES ****************");
+BehavioralDemo.RunStrategyDemo();
