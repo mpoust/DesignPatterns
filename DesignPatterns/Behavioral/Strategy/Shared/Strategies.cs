@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿
 
 namespace DesignPatterns.Behavioral.Strategy.Shared
 {

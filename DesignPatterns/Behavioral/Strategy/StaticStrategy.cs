@@ -7,7 +7,6 @@
  *  In our example we are hard-coding the strategy as a generic argument.
  */
 
-using System.Text;
 using DesignPatterns.Behavioral.Strategy.Shared;
 
 namespace DesignPatterns.Behavioral.Strategy

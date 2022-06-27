@@ -4,7 +4,6 @@
  *  Where the strategy can be swapped at runtime
  */
 
-using System.Text;
 using DesignPatterns.Behavioral.Strategy.Shared;
 
 namespace DesignPatterns.Behavioral.Strategy
