@@ -33,11 +33,11 @@ namespace DesignPatterns.Creational.Factory
             Console.WriteLine("\n External Factory Demonstration:");
 
             Console.WriteLine("\nPolar Point:");
-            var polar = PointFactory.NewPolarPoint(1.0, Math.PI / 2);
+            var polar = PointWithFactory.Factory.NewPolarPoint(1.0, Math.PI / 2);
             Console.WriteLine(polar);
 
             Console.WriteLine("\nCartesian Point:");
-            var cartesian = PointFactory.NewCartesianPoint(5.0, 15.5);
+            var cartesian = PointWithFactory.Factory.NewCartesianPoint(5.0, 15.5);
             Console.WriteLine(cartesian);
         }
 
