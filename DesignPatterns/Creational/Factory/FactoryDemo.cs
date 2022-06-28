@@ -40,5 +40,10 @@ namespace DesignPatterns.Creational.Factory
             var cartesian = PointFactory.NewCartesianPoint(5.0, 15.5);
             Console.WriteLine(cartesian);
         }
+
+        public static void RunFactoryBenefitDemonstration()
+        {
+            FactoryBenefits.Demonstration();
+        }
     }
 }
