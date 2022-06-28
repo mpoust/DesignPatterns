@@ -14,10 +14,13 @@ namespace DesignPatterns.Demonstrations
         public static async Task RunFactoryDemo()
         {
             Console.WriteLine("******** Factory Method Pattern ********");
-            FactoryMethod.RunDemonstration();
+            FactoryDemo.RunFactoryMethodDemonstration();
 
             Console.WriteLine("\n******** Async Factory Method Pattern ********");
-            await AsyncFactory.RunDemonstration();
+            await FactoryDemo.RunAsyncDemonstration();
+
+            Console.WriteLine("\n******** External Factory Pattern ********");
+            FactoryDemo.RunExternalFactoryDemonstration();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace DesignPatterns.Creational.Factory.Shared
 {
-    public class Point
+    public class PointFactoryMethod
     {
         public double X, Y;
 
@@ -18,22 +18,22 @@ namespace DesignPatterns.Creational.Factory.Shared
          *           on the enum value, and leading to optional parameter and constructor hell.
          */
 
-        private Point(double x, double y)
+        private PointFactoryMethod(double x, double y)
         {
             X = x;
             Y = y;
         }
 
         // this is a factory method (constructor)
-        public static Point NewCartesianPoint(double x, double y)
+        public static PointFactoryMethod NewCartesianPoint(double x, double y)
         {
-            return new Point(x, y);
+            return new PointFactoryMethod(x, y);
         }
 
         // this is a factory method (constructor)
-        public static Point NewPolarPoint(double rho, double theta)
+        public static PointFactoryMethod NewPolarPoint(double rho, double theta)
         {
-            return new Point(rho * Math.Cos(theta), rho * Math.Sin(theta));
+            return new PointFactoryMethod(rho * Math.Cos(theta), rho * Math.Sin(theta));
         }
 
         public override string ToString()
