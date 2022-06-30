@@ -89,7 +89,7 @@ namespace DesignPatterns.Creational.Factory
             }
         }
 
-        public IHotDrink MakeDrink()
+        public IHotDrink MakeDrink(string num, string amt)
         {
             Console.WriteLine("Available Drinks:");
             for (var index = 0; index < factories.Count; index++)
@@ -101,13 +101,13 @@ namespace DesignPatterns.Creational.Factory
             while (true)
             {
                 string s;
-                if ((s = Console.ReadLine()) != null 
+                if ((s = num) != null 
                     && int.TryParse(s, out int i) 
                     && i >= 0 
                     && i < factories.Count)
                 {
                     Console.WriteLine("Specify amount: ");
-                    s = Console.ReadLine();
+                    s = amt;
 
                     if (s != null && int.TryParse(s, out int amount) && amount > 0)
                     {
@@ -127,7 +127,8 @@ namespace DesignPatterns.Creational.Factory
         {
             Console.WriteLine("\nAbstract Factory Demonstration - Making Coffee and Tea");
             var machine = new HotDrinkMachine();
-            var drink = machine.MakeDrink();
+            var drink = machine.MakeDrink("0", "100");
+            var drink2 = machine.MakeDrink("1", "75");
 
             // below is old example that violates OCP
 

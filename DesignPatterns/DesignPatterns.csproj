@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Structural\" />
+    <Folder Include="Structural\Adapter\Shared\" />
   </ItemGroup>
 
 </Project>
