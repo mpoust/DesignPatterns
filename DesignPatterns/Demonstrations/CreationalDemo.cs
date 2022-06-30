@@ -24,6 +24,9 @@ namespace DesignPatterns.Demonstrations
 
             Console.WriteLine("\n******** Benefits of Factory Pattern - Object Tracking and Bulk Replacement ********");
             FactoryDemo.RunFactoryBenefitDemonstration();
+
+            Console.WriteLine("\n******** Abstract Factory Pattern ********");
+            FactoryDemo.RunAbstractFactoryDemonstration();
         }
     }
 }

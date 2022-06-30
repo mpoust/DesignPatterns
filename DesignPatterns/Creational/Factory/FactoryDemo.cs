@@ -45,5 +45,10 @@ namespace DesignPatterns.Creational.Factory
         {
             FactoryBenefits.Demonstration();
         }
+
+        public static void RunAbstractFactoryDemonstration()
+        {
+            AbstractFactory.RunDemonstration();
+        }
     }
 }
