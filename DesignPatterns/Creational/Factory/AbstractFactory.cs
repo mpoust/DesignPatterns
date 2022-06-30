@@ -38,31 +38,87 @@ namespace DesignPatterns.Creational.Factory
 
     public class HotDrinkMachine
     {
-        public enum AvailableDrink
-        {
-            Coffee, Tea
-        }
+        //public enum AvailableDrink
+        //{
+        //    Coffee, Tea
+        //}
 
-        private Dictionary<AvailableDrink, IHotDrinkFactory> factories =
-            new Dictionary<AvailableDrink, IHotDrinkFactory>();
+//        private Dictionary<AvailableDrink, IHotDrinkFactory> factories =
+//            new Dictionary<AvailableDrink, IHotDrinkFactory>();
+
+//        public HotDrinkMachine()
+//        {
+//            foreach (AvailableDrink drink in Enum.GetValues(typeof(AvailableDrink)))
+//            {
+//#pragma warning disable CS8600
+//                var factory = (IHotDrinkFactory)Activator.CreateInstance(
+//                    Type.GetType("DesignPatterns.Creational.Factory." + Enum.GetName(typeof(AvailableDrink), drink) +
+//                                 "Factory")!);
+//#pragma warning restore CS8600
+//                factories.Add(drink, factory);
+//            }
+//        }
+
+//        public IHotDrink MakeDrink(AvailableDrink drink, int amount)
+//        {
+//            return factories[drink].Prepare(amount);
+//        }
+
+/*
+ *  The example above violates the Open Closed Principle (OCP)
+ *
+ *  Example below corrects this with use of reflection (in actual practice we would do this via a DI framework)
+ *
+ */
+
+        private List<Tuple<string, IHotDrinkFactory>> factories = new();
 
         public HotDrinkMachine()
         {
-            foreach (AvailableDrink drink in Enum.GetValues(typeof(AvailableDrink)))
+            foreach (var t in typeof(HotDrinkMachine).Assembly.GetTypes())
             {
-#pragma warning disable CS8600
-                var factory = (IHotDrinkFactory)Activator.CreateInstance(
-                    Type.GetType("DesignPatterns.Creational.Factory." + Enum.GetName(typeof(AvailableDrink), drink) +
-                                 "Factory")!);
-#pragma warning restore CS8600
-                factories.Add(drink, factory);
+                if (typeof(IHotDrinkFactory).IsAssignableFrom(t) && !t.IsInterface)
+                {
+#pragma warning disable CS8620
+                    factories.Add(Tuple.Create(
+                        t.Name.Replace("Factory", string.Empty),
+                        (IHotDrinkFactory)Activator.CreateInstance(t)
+                        ));
+#pragma warning restore CS8620
+                } 
             }
         }
 
-        public IHotDrink MakeDrink(AvailableDrink drink, int amount)
+        public IHotDrink MakeDrink()
         {
-            return factories[drink].Prepare(amount);
+            Console.WriteLine("Available Drinks:");
+            for (var index = 0; index < factories.Count; index++)
+            {
+                var tuple = factories[index];
+                Console.WriteLine($"{index}: {tuple.Item1}");
+            }
+
+            while (true)
+            {
+                string s;
+                if ((s = Console.ReadLine()) != null 
+                    && int.TryParse(s, out int i) 
+                    && i >= 0 
+                    && i < factories.Count)
+                {
+                    Console.WriteLine("Specify amount: ");
+                    s = Console.ReadLine();
+
+                    if (s != null && int.TryParse(s, out int amount) && amount > 0)
+                    {
+                        return factories[i].Item2.Prepare(amount);
+                    }
+                }
+
+                Console.WriteLine("Incorrect input, try again");
+            }
         }
+
     }
 
     public class AbstractFactory
@@ -71,12 +127,15 @@ namespace DesignPatterns.Creational.Factory
         {
             Console.WriteLine("\nAbstract Factory Demonstration - Making Coffee and Tea");
             var machine = new HotDrinkMachine();
+            var drink = machine.MakeDrink();
 
-            var tea = machine.MakeDrink(HotDrinkMachine.AvailableDrink.Tea, 100);
-            tea.Consume();
+            // below is old example that violates OCP
 
-            var coffee = machine.MakeDrink(HotDrinkMachine.AvailableDrink.Coffee, 75);
-            coffee.Consume();
+            //var tea = machine.MakeDrink(HotDrinkMachine.AvailableDrink.Tea, 100);
+            //tea.Consume();
+
+            //var coffee = machine.MakeDrink(HotDrinkMachine.AvailableDrink.Coffee, 75);
+            //coffee.Consume();
         }
     }
 }
