@@ -10,4 +10,4 @@ Console.WriteLine("\n************************************************ CREATIONAL
 await CreationalDemo.RunFactoryDemo();
 
 Console.WriteLine("\n************************************************ STRUCTURAL STRATEGIES ************************************************");
-// todo: STRUCTURAL STRATEGIES
+StructuralDemo.RunAdapterDemo();

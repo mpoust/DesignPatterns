@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DesignPatterns.Structural.Adapter;
 
 namespace DesignPatterns.Demonstrations
 {
@@ -16,7 +17,8 @@ namespace DesignPatterns.Demonstrations
         /// </summary>
         public static void RunAdapterDemo()
         {
-
+            Console.WriteLine("******** Vector to Point Adapter ********");
+            AdapterDemo.ShowVectorToPointAdapter();
         }
     }
 }
