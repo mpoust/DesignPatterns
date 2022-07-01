@@ -19,6 +19,9 @@ namespace DesignPatterns.Demonstrations
         {
             Console.WriteLine("******** Vector to Point Adapter ********");
             AdapterDemo.ShowVectorToPointAdapter();
+
+            Console.WriteLine("\n******** Autofac for Adapter in DI ********");
+            AutofacSamples.RunAutofacSample();
         }
     }
 }
