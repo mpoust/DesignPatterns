@@ -1,5 +1,6 @@
 ﻿
 using DesignPatterns.Creational.Factory;
+using DesignPatterns.Creational.Singleton;
 
 namespace DesignPatterns.Demonstrations
 {
@@ -27,6 +28,9 @@ namespace DesignPatterns.Demonstrations
 
             Console.WriteLine("\n******** Abstract Factory Pattern ********");
             FactoryDemo.RunAbstractFactoryDemonstration();
+
+            Console.WriteLine("\n******** Singleton Pattern with in-memory Capitals database ********");
+            SingletonImplementation.RunDemo();
         }
     }
 }
