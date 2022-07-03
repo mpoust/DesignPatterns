@@ -26,7 +26,8 @@ namespace DesignPatterns.Creational.Singleton
 
             capitals = File.ReadAllLines(
                     Path.Combine(
-                        new FileInfo(typeof(IDatabase).Assembly.Location).DirectoryName, "Creational/Singleton/Shared/capitals.txt")
+                        new FileInfo(typeof(IDatabase).Assembly.Location).DirectoryName, 
+                        "Creational/Singleton/Shared/capitals.txt")
                     )
                 .Batch(2)
                 .ToDictionary(
@@ -45,6 +46,34 @@ namespace DesignPatterns.Creational.Singleton
         public static SingletonDatabase Instance => instance.Value;
     }
 
+    public class OrdinaryDatabase : IDatabase
+    {
+        // this is not a singleton by design but we can start using it as a singleton through a DI framework (autofac in this case)
+
+        private Dictionary<string, int> capitals;
+
+        private OrdinaryDatabase()
+        {
+            WriteLine("Initializing Ordinary");
+
+            capitals = File.ReadAllLines(
+                    Path.Combine(
+                        new FileInfo(typeof(IDatabase).Assembly.Location).DirectoryName, 
+                        "Creational/Singleton/Shared/capitals.txt")
+                )
+                .Batch(2)
+                .ToDictionary(
+                    list => list.ElementAt(0).Trim(),
+                    list => int.Parse(list.ElementAt(1))
+                );
+        }
+
+        public int GetPopulation(string name)
+        {
+            return capitals[name];
+        }
+    }
+
     public class SingletonRecordFinder
     {
         // this shows the problem with singleton - we have a hardcoded reference to the database
@@ -56,6 +85,29 @@ namespace DesignPatterns.Creational.Singleton
             foreach (var name in names)
             {
                 result += SingletonDatabase.Instance.GetPopulation(name);
+            }
+
+            return result;
+        }
+    }
+
+    public class ConfigurableRecordFinder
+    {
+        // this approach allows more flexibility for testing compared to SingletonRecordFinder above
+
+        private IDatabase database;
+
+        public ConfigurableRecordFinder(IDatabase database)
+        {
+            this.database = database ?? throw new ArgumentNullException(paramName: nameof(database));
+        }
+
+        public int GetTotalPopulation(IEnumerable<string> names)
+        {
+            int result = 0;
+            foreach (var name in names)
+            {
+                result += database.GetPopulation(name);
             }
 
             return result;

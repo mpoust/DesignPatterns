@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Autofac;
 using DesignPatterns.Creational;
 using DesignPatterns.Creational.Singleton;
 
@@ -45,6 +46,52 @@ namespace DesignPatterns.Exercises.Tests
             int tp = rf.GetTotalPopulation(names);
             Assert.That(tp, Is.EqualTo(17500000 + 17400000));
         }
+
+        [Test]
+        public void ConfigurableTotalPopulationTest()
+        {
+            var rf = new ConfigurableRecordFinder(new DummyDatabase());
+            var names = new[] { "alpha", "gamma" };
+            int tp = rf.GetTotalPopulation(names);
+            Assert.That(tp, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void DependencyInjectionPopulationTest()
+        {
+            var cb = new ContainerBuilder();
+            //cb.RegisterType<OrdinaryDatabase>().As<IDatabase>()
+            //    .SingleInstance();
+            cb.RegisterType<DummyDatabase>().As<IDatabase>()
+                .SingleInstance();
+            cb.RegisterType<ConfigurableRecordFinder>();
+
+            using (var c = cb.Build())
+            {
+                var rf = c.Resolve<ConfigurableRecordFinder>();
+                var names = new[] { "alpha", "gamma" };
+                int tp = rf.GetTotalPopulation(names);
+                Assert.That(tp, Is.EqualTo(4));
+            }
+
+        }
+
+        #region Setup
+
+        public class DummyDatabase : IDatabase
+        {
+            public int GetPopulation(string name)
+            {
+                return new Dictionary<string, int>
+                {
+                    ["alpha"] = 1,
+                    ["beta"] = 2,
+                    ["gamma"] = 3
+                }[name];
+            }
+        }
+
+        #endregion
 
         #endregion
     }
